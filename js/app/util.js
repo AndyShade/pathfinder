@@ -947,6 +947,19 @@ define([
     };
 
     /**
+     * convert unicode to string
+     * @param text
+     * @returns {String}
+     */
+    let unicodeToString = (text) => {
+      let result = text.replace(/\\u[\dA-F]{4}/gi,
+        function (match) {
+          return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
+      });
+      return result.substring(0, 2) == "u'" ? result.substring(2, result.length - 1) : result;
+    };
+
+    /**
      * polyfill for "passive" events
      * -> see https://github.com/zzarcon/default-passive-events
      */
@@ -2375,6 +2388,9 @@ define([
             case '0.0':
                 areaId = 32;
                 break;
+            case 'T':
+                areaId = 33;
+                break;
             default:
                 // w-space
                 for(let i = 1; i <= 18; i++){
@@ -2595,7 +2611,7 @@ define([
                 row += userName;
                 row += '</td>';
                 row += '<td>';
-                row += shipName;
+                row += unicodeToString(shipName);
                 row += '</td>';
                 row += '<td class="text-right txt-color txt-color-orangeLight">';
                 row += shipTypeName;
@@ -3345,6 +3361,8 @@ define([
         }
     };
 
+
+
     /**
      * get ResizeManager instance
      * @returns {ResizeManager}
@@ -3682,6 +3700,7 @@ define([
         showVersionInfo: showVersionInfo,
         imgRoot: imgRoot,
         eveImageUrl: eveImageUrl,
+        unicodeToString: unicodeToString,
         initPassiveEvents: initPassiveEvents,
         initDefaultBootboxConfig: initDefaultBootboxConfig,
         initDefaultTooltipConfig: initDefaultTooltipConfig,
