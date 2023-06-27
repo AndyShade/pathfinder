@@ -1,0 +1,2 @@
+define([],()=>{"use strict";return class TimeoutPromise extends Promise{constructor(e,r=6e3){let t,o="Promise"===e[Symbol.toStringTag]?e:new Promise(e),i=Promise.race([o,new Promise((e,o)=>{t=setTimeout(e=>{o(new Error("Promise timeout after "+e+"ms"))},r,r)})]);super(function(e,r){i.then(r=>{clearTimeout(t),e(r)}).catch(e=>{clearTimeout(t),r(e)})})}}});
+//# sourceMappingURL=promise.timeout.js.map

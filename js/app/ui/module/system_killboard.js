@@ -559,6 +559,15 @@ define([
         }
 
         /**
+         * open external zKillboard URL for region
+         * @param e
+         */
+        openKillboardUrlRegion(e){
+            e.stopPropagation();
+            window.open(`//zkillboard.com/region/${this._systemData.region.id}/`, '_blank');
+        }
+
+        /**
          * check if killmailData matches any killStream
          * @param killmailData
          * @returns {boolean}

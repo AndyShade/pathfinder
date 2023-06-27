@@ -10,6 +10,7 @@ namespace Exodus4D\Pathfinder\Model\Pathfinder;
 
 use DB\CortexCollection;
 use DB\SQL\Schema;
+use Exodus4D\Pathfinder\Lib\SystemTag;
 use Exodus4D\Pathfinder\Data\File\FileHandler;
 use Exodus4D\Pathfinder\Lib\Config;
 use Exodus4D\Pathfinder\Lib\Logging;
@@ -120,6 +121,12 @@ class MapModel extends AbstractMapTrackingModel {
             'type' => Schema::DT_BOOL,
             'nullable' => false,
             'default' => 0,
+            'activity-log' => true
+        ],
+        'nextBookmarks' => [
+            'type' => Schema::DT_VARCHAR256,
+            'nullable' => false,
+            'default' => '[]',
             'activity-log' => true
         ],
         'slackWebHookURL' => [
@@ -235,6 +242,7 @@ class MapModel extends AbstractMapTrackingModel {
             $mapData->persistentAliases                     = $this->persistentAliases;
             $mapData->persistentSignatures                  = $this->persistentSignatures;
             $mapData->trackAbyssalJumps                     = $this->trackAbyssalJumps;
+            $mapData->nextBookmarks                         = $this->nextBookmarks;
 
             // map scope
             $mapData->scope                                 = (object) [];
@@ -500,6 +508,7 @@ class MapModel extends AbstractMapTrackingModel {
             $system->systemId = $systemId;
             $system->mapId = $this;
             $system->setType();
+            $system->tag = SystemTag::generateFor($system, $system, $this);
         }
 
         $system->setActive(true);

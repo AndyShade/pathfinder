@@ -1,0 +1,2 @@
+define(["jquery","app/init","app/util","bootbox"],(e,t,i,a)=>{"use strict";let o="pf-credits-dialog";e.fn.showCreditsDialog=function(){requirejs(["text!templates/dialog/credit.html","mustache"],(e,t)=>{let r={version:i.getVersion(),imgSrcBackground:`${i.imgRoot()}header/pf-header-780.webp`,imgSrcPatreon:`${i.imgRoot()}misc/donate_patreon.png`,imgSrcPaypal:`${i.imgRoot()}misc/donate_paypal.png`},n=t.render(e,r);a.dialog({className:o,title:"Licence",message:n})})}});
+//# sourceMappingURL=credit.js.map

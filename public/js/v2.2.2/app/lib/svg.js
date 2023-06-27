@@ -1,0 +1,2 @@
+define([],()=>{"use strict";class SVG{static updateSymbolSvg(e,t){let s=e.getElementsByTagNameNS(this.namespaces.svg,"use")[0];s&&s.setAttribute("href",t)}static newSymbolSvg(e){let t=this.newEl(),s=this.newEl("use");return s.setAttribute("href",e),t.appendChild(s),t}static newEl(e="svg",t=this.namespaces.svg){return document.createElementNS(t,e)}}return SVG.namespaces={svg:"http://www.w3.org/2000/svg"},SVG});
+//# sourceMappingURL=svg.js.map

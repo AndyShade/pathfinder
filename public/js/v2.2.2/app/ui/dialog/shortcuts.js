@@ -1,0 +1,2 @@
+define(["jquery","app/init","app/util","bootbox","app/key"],function(t,e,s,o,u){"use strict";let a="pf-shortcuts-dialog";t.fn.showShortcutsDialog=function(){requirejs(["text!templates/dialog/shortcuts.html","mustache"],function(t,e){let s={id:a,shortcuts:u.getGroupedShortcuts()},i=e.render(t,s);o.dialog({title:"Keyboard Shortcuts",message:i,size:"large",buttons:{success:{label:"close",className:"btn-default"}},show:!0})})}});
+//# sourceMappingURL=shortcuts.js.map

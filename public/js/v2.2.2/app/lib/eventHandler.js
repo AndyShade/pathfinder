@@ -1,0 +1,2 @@
+define([],()=>{"use strict";return new class EventHandler{constructor(){this._listeners=new Map}addEventListener(e,t,s,n){this._listeners.set(t,s),e.addEventListener(this.constructor.eventParts(t).event,s,n)}removeEventListener(e,t){e.removeEventListener(this.constructor.eventParts(t).event,this._listeners.get(t)),this._listeners.delete(t)}static eventParts(e){return e.split(".").reduce((e,t,s)=>(e[s?"namespace":"event"]=t,e),{})}}});
+//# sourceMappingURL=eventHandler.js.map

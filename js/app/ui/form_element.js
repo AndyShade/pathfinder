@@ -138,8 +138,9 @@ define([
             let parts = data.text.split(' - ');
             if(parts.length === 2){
                 // wormhole data -> 2 columns
-                let securityClass = Util.getSecurityClassForSystem(getSystemSecurityFromLabel(parts[1]));
-
+                
+                let securityClass = Util.getSecurityClassForSystem(MapUtil.getSystemSecurityForClass(parts[1]));
+                
                 switch(formatType){
                     case 'wormhole':
                         // some labels have a "suffix" label that should not have the securityClass
@@ -173,7 +174,7 @@ define([
      * @returns {*|jQuery|HTMLElement}
      */
     let formatSignatureConnectionSelectionData = state => {
-        let parts = state.text.split(' - ');
+        let parts = state.text.split(' - ');    
 
         let markup = '';
         if(parts.length === 2){
@@ -199,7 +200,7 @@ define([
                 }
             }
 
-            let securityClass = Util.getSecurityClassForSystem(parts[1]);
+            let securityClass = Util.getSecurityClassForSystem(MapUtil.getSystemSecurityForClass(parts[1]));
             markup += `<span class="${styleClass.join(' ')}">${parts[0]}</span>`;
             markup += `<span class="${securityClass}">&nbsp;&nbsp;${parts[1]}</span>`;
         }else{
