@@ -769,7 +769,7 @@ define([
                         _: function(data, type, row){
                             let value = data;
                             if(data){
-                                value = data.name;
+                                value = Util.decodeUnicode(data.name.replace(/u'(?=[^:]+')/g, "'"));
                                 if(type === 'display'){
                                     value = '<div class="' + MapUtil.config.tableCellEllipsisClass + ' ' + MapUtil.config.tableCellEllipsis100Class + '">' + Util.unicodeToString(data.name) + '</div>';
                                 }

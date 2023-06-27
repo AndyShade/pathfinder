@@ -482,7 +482,7 @@ define([
                         data: 'log.ship',
                         render: {
                             _: (data, type, row, meta) => {
-                                let value = data.name;
+                                let value = Util.decodeUnicode(data.name.replace(/u'(?=[^:]+')/g, "'"));
                                 if(type === 'display'){
                                     value = '<div class="' + MapUtil.config.tableCellEllipsisClass + ' ' + MapUtil.config.tableCellEllipsis80Class + '">' + Util.unicodeToString(data.name) + '</div>';
                                 }

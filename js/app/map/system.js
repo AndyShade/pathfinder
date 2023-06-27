@@ -831,10 +831,22 @@ define([
         return infoEl;
     };
 
+    let getFooterInfoElement = data => {
+        let footerInfo = null;
+        if (data.type.id !== 1) {
+            footerInfo = $('<div>', {
+                class: config.systemFooterInfoClass,
+                html: '<span>' + data.region.name + '</span>'
+            })
+        }
+        return footerInfo
+    }
+
     return {
         showNewSystemDialog: showNewSystemDialog,
         deleteSystems: deleteSystems,
         removeSystems: removeSystems,
-        getHeadInfoElement: getHeadInfoElement
+        getHeadInfoElement: getHeadInfoElement,
+        getFooterInfoElement: getFooterInfoElement
     };
 });

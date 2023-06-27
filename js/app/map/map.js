@@ -31,6 +31,7 @@ define([
         systemClass: 'pf-system',                                       // class for all systems
         systemSelectedClass: 'pf-system-selected',                      // class for selected systems on a map
         systemHeadClass: 'pf-system-head',                              // class for system head
+        systemKSpaceHeadClass: 'pf-system-head-border-bottom',
         systemHeadNameClass: 'pf-system-head-name',                     // class for system name
         systemHeadCounterClass: 'pf-system-head-counter',               // class for system user counter
         systemHeadExpandClass: 'pf-system-head-expand',                 // class for system head expand arrow
@@ -437,13 +438,17 @@ define([
             let effectBasicClass = MapUtil.getEffectInfoForSystem('effect', 'class');
             let effectClass = MapUtil.getEffectInfoForSystem(data.effect, 'class');
             let secClass = Util.getSecurityClassForSystem(data.security);
+            let headClass = [config.systemHeadClass];
+            if (data.type.id !== 1) {
+                headClass.push(config.systemKSpaceHeadClass);
+            }
 
             system = $('<div>', {
                 id: systemId,
                 class: config.systemClass
             }).append(
                 $('<div>', {
-                    class: config.systemHeadClass
+                    class: headClass.join(' ')
                 }).append(
                     $('<span>', {
                         class: [config.systemSec, secClass].join(' '),
@@ -474,7 +479,7 @@ define([
                 ),
                 $('<div>', {
                     class: config.systemBodyClass
-                })
+                }),
             );
 
             // set initial system position
@@ -2041,7 +2046,7 @@ define([
 
         // system click events ========================================================================================
         let double = function(e){
-            e.stopPropagation(); // if not xEditable triggers page reload #945
+            e.stopPropagation();
             let system = $(this);
             let headElement = $(system).find('.' + config.systemHeadNameClass);
 
